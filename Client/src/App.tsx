@@ -4,6 +4,9 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import "./globals.css";
 import LenisScroll from "./components/LenisScroll";
+import Genrate from "./pages/Generate";
+import MyGeneration from "./pages/MyGeneration"
+import YtPreview from "./pages/YtPreview"
 
 export default function App() {
     return (
@@ -12,6 +15,10 @@ export default function App() {
             <Navbar />
             <Routes>
                 <Route path="/" element={<HomePage />} />
+                <Route path="/generate" element={<Genrate />} />
+                <Route path="/generate/:id" element={<Genrate />} />
+                <Route path="/my-generation" element={<MyGeneration />} />
+                <Route path="/preview" element={<YtPreview />} />
             </Routes>
             <Footer />
         </>
