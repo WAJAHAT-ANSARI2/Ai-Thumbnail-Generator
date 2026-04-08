@@ -1,7 +1,8 @@
 import { useState } from "react"
 import { useParams } from "react-router-dom"
-import type { IThumbnail } from "../assets/assets"
+import {ThumbnailStyle, type AspectRatio, type IThumbnail } from "../assets/assets"
 import SoftBackdrop from "../components/SoftBackdrop"
+import AspectRatioSelector from "../components/AspectRatioSelector"
 
 
 const Genrate = () =>
@@ -11,6 +12,10 @@ const Genrate = () =>
     const [additionalDetails, setAdditionalDetails] = useState('')
     const [thumbnail, setThumbnail] = useState<IThumbnail | null>(null)
     const [loading, setLoading] = useState(false)
+
+    const [aspectRatio, setAspectRatio] = useState<AspectRatio>('16:9')
+    const [colorScheme, setColorScheme] = useState<string>('colorSchemes[0].id')
+    const [style, setStyle] = useState<ThumbnailStyle>('Bold & Graphic')
 
 return(
         <>
@@ -34,7 +39,19 @@ return(
                                     <div className="flex justify-100">
                                         <span className="text-xs text-zinc-400">{title.length}/100</span>
                                     </div>
-                                </div>                            
+                                </div>
+                                {/* AspectRatioSelector */}
+                                <AspectRatioSelector />
+                                {/* StyleSelector */}
+                                {/* ColorSchemeSelector */}
+
+                                {/* Details */}
+                                <div className="space-y-2">
+                                    <label className="block text-sm font-medium">
+                                        Additional Prompts <span className="text-zinc-400 text-xs">(optional)</span>
+                                    </label>
+                                    <textarea value={additionalDetails} onChange={(e)=>setAdditionalDetails(e.target.value)} rows={3} placeholder="Add any specific elements, mod, or style preferences..." className="w-full px-4 py-3 rounded-lg border border-white/10 bg-white/6 text-zinc-100 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-pink-500 resize-none"/>
+                                </div>
                             </div>
                             {/* BUTTON */}
                             {!id && (
