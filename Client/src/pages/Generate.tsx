@@ -4,6 +4,7 @@ import {colorSchemes,  type AspectRatio, type IThumbnail, type ThumbnailStyle } 
 import SoftBackdrop from "../components/SoftBackdrop"
 import AspectRatioSelector from "../components/AspectRatioSelector"
 import StyleSelector from "../components/StyleSelector"
+import ColorSchemeSelector from "../components/ColorSchemeSelector "
 
 
 const Genrate = () =>
@@ -15,7 +16,7 @@ const Genrate = () =>
     const [loading, setLoading] = useState(false)
 
     const [aspectRatio, setAspectRatio] = useState<AspectRatio>('16:9')
-    const [colorScheme, setColorScheme] = useState<string>(colorSchemes[0].id)
+    const [colorSchemeId, setColorSchemeId] = useState<string>(colorSchemes[0].id)
     const [style, setStyle] = useState<ThumbnailStyle>('Bold & Graphic')
 
     const [styleDropDownOpen, setStyleDropDownOpen] = useState(false)   
@@ -47,7 +48,7 @@ return(
                                 {/* StyleSelector */}
                                 <StyleSelector value={style} onChange={setStyle} isOpen={styleDropDownOpen} setIsOpen={setStyleDropDownOpen}/>
                                 {/* ColorSchemeSelector */}
-
+                                <ColorSchemeSelector value={colorSchemeId} onChange={setColorSchemeId}/>
                                 {/* Details */}
                                 <div className="space-y-2">
                                     <label className="block text-sm font-medium">
