@@ -1,6 +1,6 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import {colorSchemes,  type AspectRatio, type IThumbnail, type ThumbnailStyle } from "../assets/assets"
+import {colorSchemes,  dummyThumbnails,  type AspectRatio, type IThumbnail, type ThumbnailStyle } from "../assets/assets"
 import SoftBackdrop from "../components/SoftBackdrop"
 import AspectRatioSelector from "../components/AspectRatioSelector"
 import StyleSelector from "../components/StyleSelector"
@@ -21,6 +21,29 @@ const Genrate = () =>
     const [style, setStyle] = useState<ThumbnailStyle>('Bold & Graphic')
 
     const [styleDropDownOpen, setStyleDropDownOpen] = useState(false)   
+
+    const handleGenerate = async () => {
+
+    }
+
+    const fetchThumbnail = async () =>{
+        if(id){
+            const thumbnail : any = dummyThumbnails.find((thumbnail)=> thumbnail._id === id);
+            setThumbnail(thumbnail)
+            setAdditionalDetails(thumbnail.user_prompt)
+            setTitle(thumbnail.title)
+            setColorSchemeId(thumbnail.color_scheme_id)
+            setAspectRatio(thumbnail.aspect_ratio)
+            setStyle(thumbnail.style)
+            setLoading(false)
+        }
+    }
+
+    useEffect(()=>{
+        if(id){
+            fetchThumbnail()
+        }
+    }, [id])
 return(
         <>
         <SoftBackdrop />
@@ -68,7 +91,7 @@ return(
                     </div>
                     {/* RIGHT PANEL */}
                     <div>
-                        <div className="p-6 rounded-2xl bg-white/8 boder border-white/10 shadow-xl">
+                        <div onClick={handleGenerate} className="p-6 rounded-2xl bg-white/8 boder border-white/10 shadow-xl">
                             <h2 className="text-lg font-semibold text-zinc-100 mb-4">Preview</h2>
                             <PreviewPanel thumbnail={thumbnail} isLoading={loading} aspectRatio={aspectRatio} />
                         </div>
